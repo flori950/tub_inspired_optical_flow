@@ -4,12 +4,14 @@ import math
 
 plt.close('all')
 
+
 class params:
-    global scale_factor # scale factor to compress in time (detect faster motions)
-    
-    scale_factor = 0.1 
-    
-    #routes
+    # scale factor to compress in time (detect faster motions)
+    global scale_factor
+
+    scale_factor = 0.1
+
+    # routes
 
     kernel_route = 'kernel'
 
@@ -18,30 +20,35 @@ class params:
     # n_events = 1e4
 
     mono_wm1 = 1.95
-    
+
     mono_wm2 = 0.23
 
     bi_wm1 = 0.83
-    
+
     bi_wm2 = -0.34
 
     x0 = 0
 
     y0 = 0
-    
+
     sigma = 3
 
-    xi0= math.pi * 2
+    xi0 = math.pi * 2
 
-    f0x = 0.057 # units: cycles/pix ?
-    
+    f0x = 0.057  # units: cycles/pix ?
+
     f0y = f0x
 
-    half_kernel_size = 11 # kernelsize -11 to 11 # pls change kernel size here
+    half_kernel_size = 11  # kernelsize -11 to 11 # pls change kernel size here
+
+    # bi1_mean and scale_bi's are only hyperparameters
+    scale_bi1 = 1/2
+
+    scale_bi2 = 3/4
 
     # Get a subset of events
     i_offset = 2000000
-    
+
     num_events = 80000
 
     #####
@@ -51,7 +58,7 @@ class params:
     # Voting spread of each event
     sigma_xy = 1.  # [pixels]
 
-    sigma_t =  1.0 # [time bins]
+    sigma_t = 1.0  # [time bins]
 
     # DAVIS camera pixel resolution
     sensor_width = 240
@@ -72,7 +79,7 @@ class params:
 
     def mono_mium1():
         return 0.55*scale_factor
-    
+
     def mono_mium2():
         return 0.55*scale_factor
 
@@ -93,6 +100,28 @@ class params:
 
     def bi_sigmam2():
         return 0.21*scale_factor
-    
+
     def gaussian(t, mu, sigma):
-        return np.exp( -0.5 * ((t-mu)/sigma)**2 )
+        return np.exp(-0.5 * ((t-mu)/sigma)**2)
+
+    # bi1_mean and scale_bi's are only hyperparameters
+
+    def bi1_mean():
+        return 0.2 * scale_factor
+
+    def bi2_mean():
+        return params.bi1_mean() * 2
+
+    def mono_mean():
+        return (1 * scale_factor + params.bi1_mean() * np.sqrt(36 + 10 * np.log(params.scale_bi1 / params.scale_bi2))) / 10
+
+    # 3 sigma rule for bi1 and mono
+
+    def bi1_sigma():
+        return params.bi1_mean() / 3
+
+    def bi2_sigma():
+        return params.bi1_sigma * (3/2)
+
+    def mono_sigma():
+        return params.mono_mean / 3
