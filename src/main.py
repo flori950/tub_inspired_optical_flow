@@ -132,7 +132,7 @@ print("_______________________")
 # Filter bank
 print(" Filter Bank ")
 
-angle = np.arange(0., np.pi, np.pi/8)
+angle = np.arange(0., np.pi, np.pi/8) 
 print(angle, " Angles")
 
 num_orientations = len(angle)
@@ -434,6 +434,7 @@ x_ = range(0, Nx_dft)
 xv, yv = np.meshgrid(x_, x_)
 z = np.sin(2*np.pi*(params.f0x_new*xv+params.f0y*yv))
 Z = np.fft.fft2(z)
+print(x_)
 plt.imshow(np.log(1.+np.abs(Z)), cmap='gray')
 plt.colorbar()
 print("_______________________")
