@@ -7,7 +7,7 @@ import math
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 unused import
 from matplotlib import cm
 from util import Timer, Event, normalize_image, animate, load_events, plot_3d, event_slice
-from filter_methods import gabor_filter_even, gabor_filter_odd, filter_mono, filter_bi
+from filter_methods import gabor_filter_even, gabor_filter_odd, filter_mono, filter_bi, temporal_filter, spatial_gabor_filter_even, spatial_gabor_filter_odd
 from integrator_methods import integrator, conv_integrator
 from global_params import params
 # from time import time #
@@ -18,7 +18,7 @@ plt.close('all')
 with Timer('Loading'):
     # param.sn_events = 1e4
 
-    path_to_events = params.event_route  # change path if folder is different
+    path_to_events = params.event_path  # change path if folder is different
     print("Loads events from", path_to_events)
     event_data = load_events(path_to_events)  # load_events from utils file
 print("_______________________")
@@ -36,6 +36,29 @@ dt_res = 0.03*params.get_scale_factor()
 ft_nyquist = 1. / dt_res  # Nyquist sampling frequency
 print(ft_nyquist, "Hz")
 
+#########################################################
+
+t_spatial = np.arange(0., 0.7 * params.get_scale_factor(), dt_res)
+
+Tmono_spatial = temporal_filter(t_spatial, params.mono_mean(), params.mono_sigma())
+Tbi_spatial = -1 * params.scale_bi1 * temporal_filter(t_spatial, params.bi1_mean(), params.bi1_sigma())
+Tbi_spatial += params.scale_bi2 * temporal_filter(t_spatial, params.bi2_mean(), params.bi2_sigma())
+
+fig2, ax1 = plt.subplots()
+val_max = np.max([np.max(np.abs(Tmono_spatial)), np.max(np.abs(Tbi_spatial))])
+ax1.plot(t_spatial, Tmono_spatial / val_max, "g-")
+ax1.plot(t_spatial, Tbi_spatial / val_max, "b-")
+ax1.plot(t_spatial, (Tmono_spatial+Tbi_spatial) / val_max, "r-")
+ax1.set_title("temporal filters (mono- and bi-phasic)-spatial")
+ax1.set_xlabel("time")
+plt.savefig("../output_figures/temporal_filters_mono_bi_spatial.png")
+plt.grid()
+plt.show()
+
+
+###########################################################
+
+
 t = np.arange(0., 1.2*params.get_scale_factor(), dt_res)
 Tmono = filter_mono(t)
 Tbi = filter_bi(t)
@@ -43,7 +66,7 @@ Tbi = filter_bi(t)
 fig2, ax1 = plt.subplots()
 ax1.plot(t, Tmono/np.max(np.abs(Tmono)), 'g-')
 ax1.plot(t, Tbi/np.max(np.abs(Tbi)), 'b-')
-ax1.set_title("temporal filters (mono- and bi-phasic)")
+ax1.set_title("temporal filters (mono- and bi-phasic)- original")
 ax1.set_xlabel('time')
 plt.grid()
 plt.show()
@@ -70,12 +93,23 @@ print("_______________________")
 
 print("Gabor filter calculation")
 
+
 G_even = gabor_filter_even(xv, yv, params.sigma, 0., params.f0x_new, 0.)
 G_odd = gabor_filter_odd(xv, yv, params.sigma, 0., params.f0x_new, 0.)
 fig = plt.figure()
 plt.subplot(1, 2, 1), plt.imshow(G_even)
 plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.savefig("../output_figures/gabor_filters_0.png")
 
+
+##############################################
+
+G_even = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, 0, params.f0x, params.f0y)
+G_odd = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, 0, params.f0x, params.f0y)
+fig = plt.figure()
+plt.subplot(1, 2, 1), plt.imshow(G_even)
+plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.savefig("../output_figures/gabor_filters_spatial_0.png")
 plt.grid()
 plt.show()
 
@@ -86,43 +120,75 @@ G_odd = gabor_filter_odd(xv, yv, params.sigma, np.pi/4, params.f0x_new, 0.)
 fig = plt.figure()
 plt.subplot(1, 2, 1), plt.imshow(G_even)
 plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.savefig("../output_figures/gabor_filters_pi_4.png")
 
+
+##############################################
+
+G_even = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 4, params.f0x, params.f0y)
+G_odd = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 4, params.f0x, params.f0y)
+fig = plt.figure()
+plt.subplot(1, 2, 1), plt.imshow(G_even)
+plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.savefig("../output_figures/gabor_filters_spatial_pi_4.png")
 plt.grid()
 plt.show()
 
 ##############################################
+
 
 G_even = gabor_filter_even(xv, yv, params.sigma, np.pi/2, params.f0x_new, 0.)
 G_odd = gabor_filter_odd(xv, yv, params.sigma, np.pi/2, params.f0x_new, 0.)
 fig = plt.figure()
 plt.subplot(1, 2, 1), plt.imshow(G_even)
 plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.savefig("../output_figures/gabor_filters_pi_2.png")
 
+##############################################
+
+G_even = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 2, params.f0x, params.f0y)
+G_even = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 2, params.f0x, params.f0y)
+fig = plt.figure()
+plt.subplot(1, 2, 1), plt.imshow(G_even)
+plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.savefig("../output_figures/gabor_filters_spatial_pi_2.png")
 plt.grid()
 plt.show()
 
 ##############################################
+
 
 G_even = gabor_filter_even(xv, yv, params.sigma, np.pi/4*3, params.f0x_new, 0.)
 G_odd = gabor_filter_odd(xv, yv, params.sigma, np.pi/4*3, params.f0x_new, 0.)
 fig = plt.figure()
 plt.subplot(1, 2, 1), plt.imshow(G_even)
 plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.savefig("../output_figures/gabor_filters_pi_4x3.png")
 
+##############################################
+
+G_even = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 4 * 3, params.f0x, params.f0y)
+G_odd = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 4 * 3, params.f0x, params.f0y)
+fig = plt.figure()
+plt.subplot(1, 2, 1), plt.imshow(G_even)
+plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.savefig("../output_figures/gabor_filters_spatial_pi_4x3.png")
 plt.grid()
 plt.show()
+
+
 
 space_time_kernel_1 = G_even[:, :, None]*Tbi
 space_time_kernel_2 = G_odd[:, :, None]*Tmono
 space_time_kernel_full = space_time_kernel_1 + space_time_kernel_2
 
-print("Saving Kernel to ", params.kernel_route, " folder")
+print("Saving Kernel to ", params.kernel_path, " folder")
 
-np.save(params.kernel_route + '/space_time_kernel1.npy',
+np.save(params.kernel_path + '/space_time_kernel1.npy',
         space_time_kernel_1)  # adjust folder if needed
-np.save(params.kernel_route + '/space_time_kernel2.npy',
+np.save(params.kernel_path + '/space_time_kernel2.npy',
         space_time_kernel_2)  # adjust folder if needed
-np.save(params.kernel_route + '/space_time_kernel_combined.npy',
+np.save(params.kernel_path + '/space_time_kernel_combined.npy',
         space_time_kernel_full)  # adjust folder if needed
 
 print("_______________________")
@@ -139,15 +205,15 @@ num_orientations = len(angle)
 
 filters = []
 for an in angle:
-    G_even = gabor_filter_even(xv, yv, params.sigma, an, params.f0x_new, 0.)
-    G_odd = gabor_filter_odd(xv, yv, params.sigma, an, params.f0x_new, 0.)
-    space_time_kernel = G_even[:, :, None]*Tbi + G_odd[:, :, None]*Tmono
-    filters.append(space_time_kernel)
+    G_even = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.)
+    G_odd = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.)
+    space_time_kernel_gabor_even_and_odd = G_even[:, :, None]*Tbi + G_odd[:, :, None]*Tmono # make a minus instead of a plus changes everything
+    filters.append(space_time_kernel_gabor_even_and_odd)
 
 print("Size of each kernel")
 # size of each kernel
-space_time_kernel.shape
-print(space_time_kernel.shape)
+space_time_kernel_gabor_even_and_odd.shape
+print(space_time_kernel_gabor_even_and_odd.shape)
 
 print("_______________________")
 
@@ -340,9 +406,9 @@ print("_______________________")
 
 ##############################################
 
-print("Copying kernel data to the folder ", params.kernel_route)
+print("Copying kernel data to the folder ", params.kernel_path)
 for i in range(len(filters)):
-    filename = params.kernel_route+'/kernel' + \
+    filename = params.kernel_path+'/kernel' + \
         str(i) + '.npy'  # adjust folder if needed
     np.save(filename, filters[i])
     # python scripts/visualize_dsi_volume.py -i file.npy

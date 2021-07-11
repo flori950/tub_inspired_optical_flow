@@ -9,13 +9,13 @@ class params:
     # scale factor to compress in time (detect faster motions)
     global scale_factor
 
-    scale_factor = 0.1
+    scale_factor = 1 #original 0.1
 
-    # routes
+    # paths
 
-    kernel_route = 'kernel'
+    kernel_path = 'kernel'
 
-    event_route = '../slider_far/events.txt'
+    event_path = '../slider_far/events.txt'
 
     # n_events = 1e4
 
@@ -33,13 +33,15 @@ class params:
 
     sigma = 3
 
-    xi0 = math.pi * 2
+    spatial_sigma = 25 # anders als das normale sigma
+
+    xi0 = math.pi * 2 # apperently ther is a name tau 
 
     f0x = 0.057  # units: cycles/pix ?
 
     f0y = f0x
 
-    half_kernel_size = 11  # kernelsize -11 to 11 # pls change kernel size here
+    half_kernel_size = 10 #original 11  # kernelsize -11 to 11 # pls change kernel size here
 
     # bi1_mean and scale_bi's are only hyperparameters
     scale_bi1 = 1/2
@@ -121,7 +123,7 @@ class params:
         return params.bi1_mean() / 3
 
     def bi2_sigma():
-        return params.bi1_sigma * (3/2)
+        return params.bi1_sigma() * (3/2)
 
     def mono_sigma():
-        return params.mono_mean / 3
+        return params.mono_mean() / 3
