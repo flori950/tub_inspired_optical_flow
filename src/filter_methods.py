@@ -25,6 +25,28 @@ def gabor_filter_odd(x, y, delta, theta, f0x, f0y):
 
 ###############################################
 
+def spatial_gabor_filter_even(x, y, sigma, theta, f0x, f0y):
+    x_hat = np.cos(theta) * x + np.sin(theta) * y
+    y_hat = -np.sin(theta) * x + np.cos(theta) * y
+
+    gabor_first = np.exp(-1 * ((x_hat - f0x)**2 + (y_hat - f0y)**2) * (2 * math.pi**2) / sigma**2)
+    gabor_second = np.cos(params.xi0 * (f0x * x_hat + f0y * y_hat))
+    return (params.xi0 / sigma**2) * gabor_first * gabor_second
+
+    
+
+
+def spatial_gabor_filter_odd(x, y, sigma, theta, f0x, f0y):
+    x_hat = np.cos(theta) * x + np.sin(theta) * y
+    y_hat = -np.sin(theta) * x + np.cos(theta) * y
+
+    gabor_first = np.exp(-1 * ((x_hat - f0x)**2 + (y_hat - f0y)**2) * (2 * math.pi**2 / sigma**2))
+    gabor_second = np.sin(params.xi0 * (f0x * x_hat + f0y * y_hat))
+    return (params.xi0 / sigma**2) * gabor_first * gabor_second
+
+
+###############################################
+
 
 def filter_mono(t):
     return params.mono_wm1*np.exp(-(t-params.mono_mium1())**2/(2*params.mono_sigmam1(
@@ -46,25 +68,3 @@ def temporal_filter(t, mu, sigma):
 
 
 ###############################################
-
-
-def spatial_gabor_filter_even(x, y, sigma, theta, f0x, f0y):
-    x_hat = np.cos(theta) * x + np.sin(theta) * y
-    y_hat = -np.sin(theta) * x + np.cos(theta) * y
-
-    gabor_first = np.exp(-1 * ((x_hat - f0x)**2 + (y_hat - f0y)**2) * (2 * math.pi**2) / sigma**2)
-    gabor_second = np.cos(params.xi0 * (f0x * x_hat + f0y * y_hat))
-    return (params.xi0 / sigma**2) * gabor_first * gabor_second
-
-    
-
-
-def spatial_gabor_filter_odd(x, y, sigma, theta, f0x, f0y):
-    x_hat = np.cos(theta) * x + np.sin(theta) * y
-    y_hat = -np.sin(theta) * x + np.cos(theta) * y
-
-    gabor_first = np.exp(-1 * ((x_hat - f0x)**2 + (y_hat - f0y)**2) * (2 * math.pi**2 / sigma**2))
-    gabor_second = np.sin(params.xi0 * (f0x * x_hat + f0y * y_hat))
-    return (params.xi0 / sigma**2) * gabor_first * gabor_second
-
-   

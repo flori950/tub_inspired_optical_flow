@@ -26,9 +26,9 @@ print("_______________________")
 ###############################################
 # plot_3d from utils file
 
-with Timer("Plotting..."):
-    plot_3d(event_data, len(event_data.event_list))
-print("_______________________")
+# with Timer("Plotting..."):
+#     plot_3d(event_data, len(event_data.event_list))
+# print("_______________________")
 
 ###############################################
 print("Nyquist sampling frequency calculation:")
@@ -36,7 +36,7 @@ dt_res = 0.03*params.get_scale_factor()
 ft_nyquist = 1. / dt_res  # Nyquist sampling frequency
 print(ft_nyquist, "Hz")
 
-#########################################################
+###############################################
 
 t_spatial = np.arange(0., 0.7 * params.get_scale_factor(), dt_res)
 
@@ -46,14 +46,14 @@ Tbi_spatial += params.scale_bi2 * temporal_filter(t_spatial, params.bi2_mean(), 
 
 fig2, ax1 = plt.subplots()
 val_max = np.max([np.max(np.abs(Tmono_spatial)), np.max(np.abs(Tbi_spatial))])
-ax1.plot(t_spatial, Tmono_spatial / val_max, "g-")
-ax1.plot(t_spatial, Tbi_spatial / val_max, "b-")
-ax1.plot(t_spatial, (Tmono_spatial+Tbi_spatial) / val_max, "r-")
-ax1.set_title("temporal filters (mono- and bi-phasic)-spatial")
-ax1.set_xlabel("time")
-plt.savefig("../output_figures/temporal_filters_mono_bi_spatial.png")
-plt.grid()
-plt.show()
+# ax1.plot(t_spatial, Tmono_spatial / val_max, "g-")
+# ax1.plot(t_spatial, Tbi_spatial / val_max, "b-")
+# ax1.plot(t_spatial, (Tmono_spatial+Tbi_spatial) / val_max, "r-")
+# ax1.set_title("temporal filters (mono- and bi-phasic)-spatial")
+# ax1.set_xlabel("time")
+# plt.savefig("../output_figures/temporal_filters_mono_bi_spatial.png")
+# plt.grid()
+# plt.show()
 
 
 ###########################################################
@@ -64,13 +64,13 @@ Tmono = filter_mono(t)
 Tbi = filter_bi(t)
 
 fig2, ax1 = plt.subplots()
-ax1.plot(t, Tmono/np.max(np.abs(Tmono)), 'g-')
-ax1.plot(t, Tbi/np.max(np.abs(Tbi)), 'b-')
-ax1.set_title("temporal filters (mono- and bi-phasic)- original")
-ax1.set_xlabel('time')
-plt.grid()
-plt.show()
-plt.savefig("../output_figures/temporal_filters_mono_bi.png")
+# ax1.plot(t, Tmono/np.max(np.abs(Tmono)), 'g-')
+# ax1.plot(t, Tbi/np.max(np.abs(Tbi)), 'b-')
+# ax1.set_title("temporal filters (mono- and bi-phasic)- original")
+# ax1.set_xlabel('time')
+# plt.savefig("../output_figures/temporal_filters_mono_bi.png")
+# plt.grid()
+# plt.show()
 print("_______________________")
 
 ##############################################
@@ -95,7 +95,8 @@ print("Gabor filter calculation")
 
 
 G_even = gabor_filter_even(xv, yv, params.sigma, 0., params.f0x_new, 0.)
-G_odd = gabor_filter_odd(xv, yv, params.sigma, 0., params.f0x_new, 0.)
+G_odd = gabor_filter_odd(xv, yv, params.sigma, 0., params.f0x, 0.)
+
 fig = plt.figure()
 plt.subplot(1, 2, 1), plt.imshow(G_even)
 plt.subplot(1, 2, 2), plt.imshow(G_odd)
@@ -104,14 +105,14 @@ plt.savefig("../output_figures/gabor_filters_0.png")
 
 ##############################################
 
-G_even = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, 0, params.f0x, params.f0y)
-G_odd = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, 0, params.f0x, params.f0y)
+G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, 0, params.f0x, params.f0y)
+G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, 0, params.f0x, params.f0y)
 fig = plt.figure()
-plt.subplot(1, 2, 1), plt.imshow(G_even)
-plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
+plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
 plt.savefig("../output_figures/gabor_filters_spatial_0.png")
-plt.grid()
-plt.show()
+# plt.grid()
+# plt.show()
 
 ##############################################
 
@@ -125,14 +126,14 @@ plt.savefig("../output_figures/gabor_filters_pi_4.png")
 
 ##############################################
 
-G_even = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 4, params.f0x, params.f0y)
-G_odd = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 4, params.f0x, params.f0y)
+G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 4, params.f0x, params.f0y)
+G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 4, params.f0x, params.f0y)
 fig = plt.figure()
-plt.subplot(1, 2, 1), plt.imshow(G_even)
-plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
+plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
 plt.savefig("../output_figures/gabor_filters_spatial_pi_4.png")
-plt.grid()
-plt.show()
+# plt.grid()
+# plt.show()
 
 ##############################################
 
@@ -146,14 +147,14 @@ plt.savefig("../output_figures/gabor_filters_pi_2.png")
 
 ##############################################
 
-G_even = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 2, params.f0x, params.f0y)
-G_even = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 2, params.f0x, params.f0y)
+G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 2, params.f0x, params.f0y)
+G_even_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 2, params.f0x, params.f0y)
 fig = plt.figure()
-plt.subplot(1, 2, 1), plt.imshow(G_even)
-plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
+plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
 plt.savefig("../output_figures/gabor_filters_spatial_pi_2.png")
-plt.grid()
-plt.show()
+# plt.grid()
+# plt.show()
 
 ##############################################
 
@@ -167,19 +168,19 @@ plt.savefig("../output_figures/gabor_filters_pi_4x3.png")
 
 ##############################################
 
-G_even = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 4 * 3, params.f0x, params.f0y)
-G_odd = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 4 * 3, params.f0x, params.f0y)
+G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 4 * 3, params.f0x, params.f0y)
+G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 4 * 3, params.f0x, params.f0y)
 fig = plt.figure()
-plt.subplot(1, 2, 1), plt.imshow(G_even)
-plt.subplot(1, 2, 2), plt.imshow(G_odd)
+plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
+plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
 plt.savefig("../output_figures/gabor_filters_spatial_pi_4x3.png")
-plt.grid()
-plt.show()
+# plt.grid()
+# plt.show()
 
 
 
-space_time_kernel_1 = G_even[:, :, None]*Tbi
-space_time_kernel_2 = G_odd[:, :, None]*Tmono
+space_time_kernel_1 = G_even_spatial[:, :, None]*Tbi_spatial   #change to _spatial if needed #original G_even        
+space_time_kernel_2 = G_odd_spatial[:, :, None]*Tmono_spatial  #change to _spatial if needed #original G_odd
 space_time_kernel_full = space_time_kernel_1 + space_time_kernel_2
 
 print("Saving Kernel to ", params.kernel_path, " folder")
@@ -205,15 +206,18 @@ num_orientations = len(angle)
 
 filters = []
 for an in angle:
-    G_even = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.)
-    G_odd = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.)
-    space_time_kernel_gabor_even_and_odd = G_even[:, :, None]*Tbi + G_odd[:, :, None]*Tmono # make a minus instead of a plus changes everything
-    filters.append(space_time_kernel_gabor_even_and_odd)
+    G_even = gabor_filter_even(xv, yv, params.sigma, an, params.f0x_new, 0.) #sigma = 3
+    G_odd = gabor_filter_odd(xv, yv, params.sigma, an, params.f0x_new, 0.)
+    G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.) #sigma_spatial = 25
+    G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.)
+    space_time_kernel_gabor_even_and_odd_spatial = G_even_spatial[:, :, None]*Tbi_spatial + G_odd_spatial[:, :, None]*Tmono_spatial # make a minus instead of a plus changes everything
+    space_time_kernel_gabor_even_and_odd = G_even[:, :, None]*Tbi + G_odd[:, :, None]*Tmono
+    filters.append(space_time_kernel_gabor_even_and_odd_spatial) #change to _spatial if needed # original  space_time_kernel_gabor_even_and_od
 
 print("Size of each kernel")
 # size of each kernel
-space_time_kernel_gabor_even_and_odd.shape
-print(space_time_kernel_gabor_even_and_odd.shape)
+space_time_kernel_gabor_even_and_odd_spatial.shape          #change to _spatial if needed
+print(space_time_kernel_gabor_even_and_odd_spatial.shape)   #change to _spatial if needed
 
 print("_______________________")
 
@@ -274,8 +278,8 @@ plt.gca().set_aspect((1. * kernel_size / num_bins_t))
 plt.xlabel("x pixel"), plt.ylabel(
     "time bin"), plt.title("t-biphasic - space-even")
 
-plt.grid()
-plt.show()
+# plt.grid()
+# plt.show()
 
 
 plt.subplot(1, 3, 2),
@@ -284,8 +288,8 @@ plt.gca().set_aspect((1. * kernel_size / num_bins_t))
 plt.xlabel("x pixel"), plt.ylabel(
     "time bin"), plt.title("t-monophasic - space-odd")
 
-plt.grid()
-plt.show()
+# plt.grid()
+# plt.show()
 
 
 plt.subplot(1, 3, 3),
@@ -294,8 +298,8 @@ plt.imshow(np.transpose(
 plt.gca().set_aspect((1. * kernel_size / num_bins_t))
 plt.xlabel("x pixel"), plt.ylabel("time bin"), plt.title("Combined filter")
 
-plt.grid()
-plt.show()
+# plt.grid()
+# plt.show()
 
 print("_______________________")
 
@@ -316,8 +320,8 @@ for i in range(len(filters)):
     plt.xlabel("x pixel"), plt.ylabel(
         "time bin"), plt.title("space-time filter")
 
-plt.grid()
-plt.show()
+# plt.grid()
+# plt.show()
 
 print("_______________________")
 
@@ -445,8 +449,8 @@ for i in range(len(outs)):
     plt.imshow(out_xy[i], vmax=0.8*max, vmin=0)
     plt.title('Output of filter ' + str(i))
 
-plt.grid()
-plt.show()
+# plt.grid()
+# plt.show()
 
 print("Output of ", str(i+1), " filters ")
 print("_______________________")
@@ -464,8 +468,6 @@ print("u = ", u.shape)
 print("v = ", v.shape)
 print("_______________________")
 
-##############################################
-
 fig = plt.figure(figsize=(24, 18))
 image = np.zeros((params.band_height, params.band_width))
 print("Image shape:")
@@ -478,8 +480,9 @@ plt.quiver(X, Y, u, v, color='r')
 #     for y_ in range(band_height):
 #         plt.quiver(y_,x_,u[y_,x_],v[y_,x_],color='black',width=0.001,minlength=0.05)
 plt.title('Output of velocity ')
-plt.show()
 plt.savefig("../output_figures/temporal_Output_of_velocity.png")
+plt.grid()
+plt.show()
 print("_______________________")
 
 ##############################################

@@ -9,7 +9,7 @@ class params:
     # scale factor to compress in time (detect faster motions)
     global scale_factor
 
-    scale_factor = 1 #original 0.1
+    scale_factor = 0.1 #original 0.1
 
     # paths
 
@@ -31,9 +31,9 @@ class params:
 
     y0 = 0
 
-    sigma = 3
+    sigma = 3 #original 3
 
-    spatial_sigma = 25 # anders als das normale sigma
+    spatial_sigma = 25 # anders als das normale sigma # original 25
 
     xi0 = math.pi * 2 # apperently ther is a name tau 
 
@@ -41,7 +41,7 @@ class params:
 
     f0y = f0x
 
-    half_kernel_size = 10 #original 11  # kernelsize -11 to 11 # pls change kernel size here
+    half_kernel_size = 11 #original 11  # kernelsize -11 to 11 # pls change kernel size here
 
     # bi1_mean and scale_bi's are only hyperparameters
     scale_bi1 = 1/2
