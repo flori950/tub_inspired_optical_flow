@@ -7,7 +7,7 @@ import math
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 unused import
 from matplotlib import cm
 from util import Timer, Event, normalize_image, animate, load_events, plot_3d, event_slice
-from filter_methods import gabor_filter_even, gabor_filter_odd, filter_mono, filter_bi, temporal_filter, spatial_gabor_filter_even, spatial_gabor_filter_odd
+from filter_methods import filter_bi_spacial, filter_mono_spacial, gabor_filter_even, gabor_filter_odd, filter_mono, filter_bi, temporal_filter, spatial_gabor_filter_even, spatial_gabor_filter_odd
 from integrator_methods import integrator, conv_integrator
 from global_params import params
 # from time import time #
@@ -40,10 +40,8 @@ print(ft_nyquist, "Hz")
 
 t_spatial = np.arange(0., 0.7 * params.get_scale_factor(), dt_res)
 
-Tmono_spatial = temporal_filter(t_spatial, params.mono_mean(), params.mono_sigma())
-Tbi_spatial = -1 * params.scale_bi1 * temporal_filter(t_spatial, params.bi1_mean(), params.bi1_sigma())
-Tbi_spatial += params.scale_bi2 * temporal_filter(t_spatial, params.bi2_mean(), params.bi2_sigma())
-
+Tmono_spatial = filter_mono_spacial(t_spatial)
+Tbi_spatial = filter_bi_spacial(t_spatial)
 #image genereation
 
 # fig2, ax1 = plt.subplots()
@@ -109,12 +107,12 @@ plt.savefig("../output_figures/gabor_filters_0.png")
 
 ##############################################
 
-G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, 0, params.f0x, params.f0y)
-G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, 0, params.f0x, params.f0y)
-fig = plt.figure()
-plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
-plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
-plt.savefig("../output_figures/gabor_filters_spatial_0.png")
+# G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, 0, params.f0x, params.f0y)
+# G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, 0, params.f0x, params.f0y)
+# fig = plt.figure()
+# plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
+# plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
+# plt.savefig("../output_figures/gabor_filters_spatial_0.png")
 # plt.grid()
 # plt.show()
 
@@ -130,12 +128,12 @@ plt.savefig("../output_figures/gabor_filters_pi_4.png")
 
 ##############################################
 
-G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 4, params.f0x, params.f0y)
-G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 4, params.f0x, params.f0y)
-fig = plt.figure()
-plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
-plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
-plt.savefig("../output_figures/gabor_filters_spatial_pi_4.png")
+# G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 4, params.f0x, params.f0y)
+# G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 4, params.f0x, params.f0y)
+# fig = plt.figure()
+# plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
+# plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
+# plt.savefig("../output_figures/gabor_filters_spatial_pi_4.png")
 # plt.grid()
 # plt.show()
 
@@ -151,12 +149,12 @@ plt.savefig("../output_figures/gabor_filters_pi_2.png")
 
 ##############################################
 
-G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 2, params.f0x, params.f0y)
-G_even_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 2, params.f0x, params.f0y)
-fig = plt.figure()
-plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
-plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
-plt.savefig("../output_figures/gabor_filters_spatial_pi_2.png")
+# G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 2, params.f0x, params.f0y)
+# G_even_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 2, params.f0x, params.f0y)
+# fig = plt.figure()
+# plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
+# plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
+# plt.savefig("../output_figures/gabor_filters_spatial_pi_2.png")
 # plt.grid()
 # plt.show()
 
@@ -172,19 +170,19 @@ plt.savefig("../output_figures/gabor_filters_pi_4x3.png")
 
 ##############################################
 
-G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 4 * 3, params.f0x, params.f0y)
-G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 4 * 3, params.f0x, params.f0y)
-fig = plt.figure()
-plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
-plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
-plt.savefig("../output_figures/gabor_filters_spatial_pi_4x3.png")
+# G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, np.pi / 4 * 3, params.f0x, params.f0y)
+# G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, np.pi / 4 * 3, params.f0x, params.f0y)
+# fig = plt.figure()
+# plt.subplot(1, 2, 1), plt.imshow(G_even_spatial)
+# plt.subplot(1, 2, 2), plt.imshow(G_odd_spatial)
+# plt.savefig("../output_figures/gabor_filters_spatial_pi_4x3.png")
 # plt.grid()
 # plt.show()
 
 
 
-space_time_kernel_1 = G_even_spatial[:, :, None]*Tbi  #change to _spatial if needed #original G_even        
-space_time_kernel_2 = G_odd_spatial[:, :, None]*Tmono  #change to _spatial if needed #original G_odd
+space_time_kernel_1 = G_even[:, :, None]*Tbi  #change to _spatial if needed #original G_even        
+space_time_kernel_2 = G_odd[:, :, None]*Tmono  #change to _spatial if needed #original G_odd
 space_time_kernel_full = space_time_kernel_1 + space_time_kernel_2
 
 print("Saving Kernel to ", params.kernel_path, " folder")
@@ -212,9 +210,9 @@ filters = []
 for an in angle:
     G_even = gabor_filter_even(xv, yv, params.sigma, an, params.f0x_new, 0.) #sigma = 3
     G_odd = gabor_filter_odd(xv, yv, params.sigma, an, params.f0x_new, 0.)
-    G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.) #sigma_spatial = 25
-    G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.)
-    space_time_kernel_gabor_even_and_odd_spatial = G_even_spatial[:, :, None]*Tbi_spatial + G_odd_spatial[:, :, None]*Tmono_spatial # make a minus instead of a plus changes everything
+    # G_even_spatial = spatial_gabor_filter_even(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.) #sigma_spatial = 25
+    # G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.)
+    #space_time_kernel_gabor_even_and_odd_spatial = G_even_spatial[:, :, None]*Tbi_spatial + G_odd_spatial[:, :, None]*Tmono_spatial # make a minus instead of a plus changes everything
     space_time_kernel_gabor_even_and_odd = G_even[:, :, None]*Tbi + G_odd[:, :, None]*Tmono
     filters.append(space_time_kernel_gabor_even_and_odd) #change to _spatial if needed # original  space_time_kernel_gabor_even_and_od
 

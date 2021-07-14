@@ -47,6 +47,14 @@ def spatial_gabor_filter_odd(x, y, sigma, theta, f0x, f0y):
 
 ###############################################
 
+def filter_bi_spacial(t_spatial):  
+    return -1 * params.scale_bi1 * temporal_filter(t_spatial, params.bi1_mean(), params.bi1_sigma())+ params.scale_bi2 * temporal_filter(t_spatial, params.bi2_mean(), params.bi2_sigma())
+
+def filter_mono_spacial(t_spatial):
+    return temporal_filter(t_spatial, params.mono_mean(), params.mono_sigma())
+
+###############################################
+
 
 def filter_mono(t):
     return params.mono_wm1*np.exp(-(t-params.mono_mium1())**2/(2*params.mono_sigmam1(
@@ -58,7 +66,6 @@ def filter_bi(t):
     return params.bi_wm1*np.exp(-(t-params.bi_mium1())**2/(2*params.bi_sigmam1(
     )**2))+params.bi_wm2*np.exp(-(t-params.bi_mium2())**2/(2*params.bi_sigmam2()**2))
     
-
 ###############################################
 
 

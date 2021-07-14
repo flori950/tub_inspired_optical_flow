@@ -15,7 +15,7 @@ class params:
 
     kernel_path = 'kernel'
 
-    event_path = '../slider_far/output.txt'
+    event_path = '../slider_far/events.txt'
 
     # n_events = 1e4
 
@@ -33,7 +33,7 @@ class params:
 
     sigma = 3 #original 3
 
-    spatial_sigma = 25 # anders als das normale sigma # original 25
+    spatial_sigma = 3 # anders als das normale sigma # original 25
 
     xi0 = math.pi * 2 # apperently ther is a name tau 
 
@@ -68,13 +68,15 @@ class params:
     sensor_height = 180
 
     # Select sub-region of the image
-    band_height = 200
+    band_height = 40 # 40 original
 
-    band_width = 200
+    band_width = 80 # 80 original
 
-    offset_height = 100
+    offset_height = 20  # 20 original
 
-    offset_width = 100
+    offset_width = 70   # 70 original
+
+    ########################
 
     def get_scale_factor():
         return scale_factor
