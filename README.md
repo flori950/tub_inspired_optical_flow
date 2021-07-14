@@ -36,8 +36,8 @@ is provided by [Cedric Scheerlinck](https://www.cedricscheerlinck.com/about/)
 >-Figures:  
 >> the generated figures are saved in the folder: output_figures  
 
->-Slides:
->>This is the folder contains the slides which explains some general ideas of this project.
+>-Sources:
+>>This is the folder contains the slides and the original jupyter notebook which explains some general ideas of this project. Futhermore it has the implementation and usage of the temporal filter
 > > 1.optical_flow.ipynb
 > > > a.definitions of  spatial and temporal filters  
 > > > b. visualization of filters above in 2d or 3d view   
