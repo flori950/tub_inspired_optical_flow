@@ -44,8 +44,10 @@ Tmono_spatial = temporal_filter(t_spatial, params.mono_mean(), params.mono_sigma
 Tbi_spatial = -1 * params.scale_bi1 * temporal_filter(t_spatial, params.bi1_mean(), params.bi1_sigma())
 Tbi_spatial += params.scale_bi2 * temporal_filter(t_spatial, params.bi2_mean(), params.bi2_sigma())
 
-fig2, ax1 = plt.subplots()
-val_max = np.max([np.max(np.abs(Tmono_spatial)), np.max(np.abs(Tbi_spatial))])
+#image genereation
+
+# fig2, ax1 = plt.subplots()
+# val_max = np.max([np.max(np.abs(Tmono_spatial)), np.max(np.abs(Tbi_spatial))])
 # ax1.plot(t_spatial, Tmono_spatial / val_max, "g-")
 # ax1.plot(t_spatial, Tbi_spatial / val_max, "b-")
 # ax1.plot(t_spatial, (Tmono_spatial+Tbi_spatial) / val_max, "r-")
@@ -63,7 +65,9 @@ t = np.arange(0., 1.2*params.get_scale_factor(), dt_res)
 Tmono = filter_mono(t)
 Tbi = filter_bi(t)
 
-fig2, ax1 = plt.subplots()
+# image genereation
+
+# fig2, ax1 = plt.subplots()
 # ax1.plot(t, Tmono/np.max(np.abs(Tmono)), 'g-')
 # ax1.plot(t, Tbi/np.max(np.abs(Tbi)), 'b-')
 # ax1.set_title("temporal filters (mono- and bi-phasic)- original")
@@ -179,8 +183,8 @@ plt.savefig("../output_figures/gabor_filters_spatial_pi_4x3.png")
 
 
 
-space_time_kernel_1 = G_even_spatial[:, :, None]*Tbi_spatial   #change to _spatial if needed #original G_even        
-space_time_kernel_2 = G_odd_spatial[:, :, None]*Tmono_spatial  #change to _spatial if needed #original G_odd
+space_time_kernel_1 = G_even_spatial[:, :, None]*Tbi  #change to _spatial if needed #original G_even        
+space_time_kernel_2 = G_odd_spatial[:, :, None]*Tmono  #change to _spatial if needed #original G_odd
 space_time_kernel_full = space_time_kernel_1 + space_time_kernel_2
 
 print("Saving Kernel to ", params.kernel_path, " folder")
@@ -212,12 +216,12 @@ for an in angle:
     G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.)
     space_time_kernel_gabor_even_and_odd_spatial = G_even_spatial[:, :, None]*Tbi_spatial + G_odd_spatial[:, :, None]*Tmono_spatial # make a minus instead of a plus changes everything
     space_time_kernel_gabor_even_and_odd = G_even[:, :, None]*Tbi + G_odd[:, :, None]*Tmono
-    filters.append(space_time_kernel_gabor_even_and_odd_spatial) #change to _spatial if needed # original  space_time_kernel_gabor_even_and_od
+    filters.append(space_time_kernel_gabor_even_and_odd) #change to _spatial if needed # original  space_time_kernel_gabor_even_and_od
 
 print("Size of each kernel")
 # size of each kernel
-space_time_kernel_gabor_even_and_odd_spatial.shape          #change to _spatial if needed
-print(space_time_kernel_gabor_even_and_odd_spatial.shape)   #change to _spatial if needed
+space_time_kernel_gabor_even_and_odd.shape          #change to _spatial if needed
+print(space_time_kernel_gabor_even_and_odd.shape)   #change to _spatial if needed
 
 print("_______________________")
 

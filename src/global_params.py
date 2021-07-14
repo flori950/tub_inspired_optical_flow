@@ -15,7 +15,7 @@ class params:
 
     kernel_path = 'kernel'
 
-    event_path = '../slider_far/events.txt'
+    event_path = '../slider_far/output.txt'
 
     # n_events = 1e4
 
@@ -49,9 +49,9 @@ class params:
     scale_bi2 = 3/4
 
     # Get a subset of events
-    i_offset = 2000000
+    i_offset = 2000000 # original 2000000
 
-    num_events = 80000
+    num_events = 80000 # original 80000
 
     #####
 
@@ -68,13 +68,13 @@ class params:
     sensor_height = 180
 
     # Select sub-region of the image
-    band_height = 40
+    band_height = 200
 
-    band_width = 80
+    band_width = 200
 
-    offset_height = 20
+    offset_height = 100
 
-    offset_width = 70
+    offset_width = 100
 
     def get_scale_factor():
         return scale_factor
