@@ -9,7 +9,7 @@ class params:
     # scale factor to compress in time (detect faster motions)
     global scale_factor
 
-    scale_factor = 0.1 #original 0.1
+    scale_factor = 1.0 #original 0.1
 
     # paths
 
@@ -104,9 +104,6 @@ class params:
 
     def bi_sigmam2():
         return 0.21*scale_factor
-
-    def gaussian(t, mu, sigma):
-        return np.exp(-0.5 * ((t-mu)/sigma)**2)
 
     # bi1_mean and scale_bi's are only hyperparameters
 

@@ -182,8 +182,8 @@ plt.show()
 
 
 
-space_time_kernel_1 = G_even[:, :, None]*Tbi  #change to _spatial if needed #original G_even        
-space_time_kernel_2 = G_odd[:, :, None]*Tmono  #change to _spatial if needed #original G_odd
+space_time_kernel_1 = G_even_spatial[:, :, None]*Tbi_spatial  #change to _spatial if needed #original G_even        
+space_time_kernel_2 = G_odd_spatial[:, :, None]*Tmono_spatial  #change to _spatial if needed #original G_odd
 space_time_kernel_full = space_time_kernel_1 + space_time_kernel_2
 
 print("Saving Kernel to ", params.kernel_path, " folder")
@@ -215,12 +215,12 @@ for an in angle:
     G_odd_spatial = spatial_gabor_filter_odd(xv, yv, params.spatial_sigma, an, params.f0x_new, 0.)
     space_time_kernel_gabor_even_and_odd_spatial = G_even_spatial[:, :, None]*Tbi_spatial + G_odd_spatial[:, :, None]*Tmono_spatial # make a minus instead of a plus changes everything
     space_time_kernel_gabor_even_and_odd = G_even[:, :, None]*Tbi + G_odd[:, :, None]*Tmono
-    filters.append(space_time_kernel_gabor_even_and_odd) #change to _spatial if needed # original  space_time_kernel_gabor_even_and_od
+    filters.append(space_time_kernel_gabor_even_and_odd_spatial) #change to _spatial if needed # original  space_time_kernel_gabor_even_and_od
 
 print("Size of each kernel")
 # size of each kernel
-space_time_kernel_gabor_even_and_odd.shape          #change to _spatial if needed
-print(space_time_kernel_gabor_even_and_odd.shape)   #change to _spatial if needed
+space_time_kernel_gabor_even_and_odd_spatial.shape          #change to _spatial if needed
+print(space_time_kernel_gabor_even_and_odd_spatial.shape)   #change to _spatial if needed
 
 print("_______________________")
 

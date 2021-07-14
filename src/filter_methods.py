@@ -55,6 +55,12 @@ def filter_mono_spacial(t_spatial):
 
 ###############################################
 
+def temporal_filter(t, mu, sigma):
+    temp_filter = np.exp(-(t - mu)**2 / (2 * sigma**2))
+    return temp_filter
+
+
+###############################################
 
 def filter_mono(t):
     return params.mono_wm1*np.exp(-(t-params.mono_mium1())**2/(2*params.mono_sigmam1(
@@ -68,10 +74,5 @@ def filter_bi(t):
     
 ###############################################
 
-
-def temporal_filter(t, mu, sigma):
-    temp_filter = np.exp(-(t - mu)**2 / (2 * sigma**2))
-    return temp_filter
-
-
-###############################################
+def gaussian(t, mu, sigma):
+        return np.exp(-0.5 * ((t-mu)/sigma)**2)
