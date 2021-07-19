@@ -6,6 +6,7 @@ import math
 # This import registers the 3D projection, but is otherwise unused.
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 unused import
 from matplotlib import cm
+import pandas as pd
 from util import Timer, Event, normalize_image, animate, load_events, plot_3d, event_slice
 from filter_methods import filter_bi_spacial, filter_mono_spacial, gabor_filter_even, gabor_filter_odd, filter_mono, filter_bi, temporal_filter, spatial_gabor_filter_even, spatial_gabor_filter_odd
 from integrator_methods import integrator, conv_integrator
@@ -23,7 +24,24 @@ with Timer('Loading'):
     event_data = load_events(path_to_events)  # load_events from utils file
 print("_______________________")
 
-###############################################
+############################################### Veli implementation
+event_list = pd.read_csv(path_to_events, delim_whitespace=True, header=None,
+                          names=['t', 'x', 'y', 'p'],
+                          dtype={'t': np.float64, 'x': np.int16, 'y': np.int16, 'p': np.int8},
+                          engine='c', nrows=None, memory_map=True)
+# no polarity needed
+event_list = event_list.drop(columns=['p'])
+event_list = event_list.to_records(index=False)
+
+# First row: time, x, y
+time_start = event_list[0][0]
+time_end = event_list[len(event_list)-1][0]
+
+print("Loaded {:.2f}M events.".format(len(event_list) / 1e6))
+print("Time between: {} and {}.".format(time_start, time_end))
+
+
+############################################### exclude if to slow 
 # plot_3d from utils file
 
 # with Timer("Plotting..."):
