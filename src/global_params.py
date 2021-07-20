@@ -15,7 +15,7 @@ class params:
 
     kernel_path = 'kernel'
 
-    event_path = '../slider_far/events.txt'
+    event_path = '../slider_far/output.txt'
 
     # n_events = 1e4
 
@@ -50,9 +50,9 @@ class params:
     scale_bi2 = 3/4
 
     # Get a subset of events
-    i_offset = 2000000 # original 2000000
+    i_offset = 2900000 # original 2000000
 
-    num_events = 80000 # original 80000
+    num_events = 25000 # original 80000
 
     #####
 
@@ -64,14 +64,14 @@ class params:
     sigma_t = 1.0  # [time bins]
 
     # DAVIS camera pixel resolution
-    sensor_width = 240
+    sensor_width = 280
 
     sensor_height = 180
 
     # Select sub-region of the image
-    band_height = 40 # 40 original
+    band_height = 300   # 40 original
 
-    band_width = 80 # 80 original
+    band_width = 250 # 80 original
 
     offset_height = 20  # 20 original
 
