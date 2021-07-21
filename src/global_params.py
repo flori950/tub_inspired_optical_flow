@@ -71,7 +71,7 @@ class params:
     # Select sub-region of the image
     band_height = 300   # 40 original
 
-    band_width = 250 # 80 original
+    band_width = 300 # 80 original
 
     offset_height = 20  # 20 original
 
