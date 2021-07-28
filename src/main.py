@@ -8,7 +8,7 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 unused import
 from matplotlib import cm
 from util import Timer, Event, normalize_image, animate, load_events, plot_3d, event_slice
 from filter_methods import filter_bi_spacial, filter_mono_spacial, gabor_filter_even, gabor_filter_odd, filter_mono, filter_bi, temporal_filter, spatial_gabor_filter_even, spatial_gabor_filter_odd, normalize
-from optimized_show_methods import quiver_show_subset
+from optimized_image_generation_methods import quiver_show_subset
 from integrator_methods import integrator, conv_integrator
 from global_params import params
 # from time import time #
@@ -557,16 +557,16 @@ u = np.zeros((params.band_height, params.band_width), dtype=np.float32)
 v = np.zeros((params.band_height, params.band_width), dtype=np.float32)
 ######################here##############################
 
-# for k in range(params.filter_amount):
-#     # there is no minus in sin, which I think is correct.
-#     # this is due to -theta in filter.
-#     u = u + np.cos(params.xi0 * k / params.filter_amount) * grid_vox[:,:,k]
-#     v = v + np.sin(params.xi0 * k / params.filter_amount) * grid_vox[:,:,k]
+for k in range(params.filter_amount):
+    # there is no minus in sin, which I think is correct.
+    # this is due to -theta in filter.
+    u = u + np.cos(params.xi0 * k / params.filter_amount) * grid_vox[:,:,k]
+    v = v + np.sin(params.xi0 * k / params.filter_amount) * grid_vox[:,:,k]
 ########################here##################################
 
 u_normalized, v_normalized = normalize(u, v)
 quiver_show_subset(u_normalized, v_normalized, 0, params.band_width, 0, params.band_height)
-plt.savefig("output_figures/whole_image_normalized.png")
+plt.savefig("../output_figures//whole_image_normalized.png")
 
 
 ##############################################
