@@ -8,6 +8,7 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 unused import
 from matplotlib import cm
 from util import Timer, Event, normalize_image, animate, load_events, plot_3d, event_slice
 from filter_methods import filter_bi_spacial, filter_mono_spacial, gabor_filter_even, gabor_filter_odd, filter_mono, filter_bi, temporal_filter, spatial_gabor_filter_even, spatial_gabor_filter_odd, normalize
+from optimized_show_methods import quiver_show_subset
 from integrator_methods import integrator, conv_integrator
 from global_params import params
 # from time import time #
@@ -270,33 +271,33 @@ print("_______________________")
 
 ############################################## Error
 
-fig = plt.figure(figsize=(50, 15))
-# auto_add_to_figure = False
-ax = Axes3D(fig)  # error in newer pyton
-# fig.add_axes(Axes3D())
-# auto_add_to_figure = False
+# fig = plt.figure(figsize=(50, 15))
+# # auto_add_to_figure = False
+# ax = Axes3D(fig)  # error in newer pyton
+# # fig.add_axes(Axes3D())
+# # auto_add_to_figure = False
 
-X = np.arange(-np.pi*5, np.pi*5, np.pi/10)
-Y = np.arange(-np.pi*5, np.pi*5, np.pi/10)
-R = np.arange(0, np.pi, np.pi/8)
-X, Y = np.meshgrid(X, Y)
-for i in range(len(filters)):
+# X = np.arange(-np.pi*5, np.pi*5, np.pi/10)
+# Y = np.arange(-np.pi*5, np.pi*5, np.pi/10)
+# R = np.arange(0, np.pi, np.pi/8)
+# X, Y = np.meshgrid(X, Y)
+# for i in range(len(filters)):
 
-    Z = gabor_filter_even(X, Y, 2.5, R[i], params.f0x_new, params.f0y)
-    ax = fig.add_subplot(2, int(len(filters)/2), i+1, projection='3d')
-    ax.plot_surface(X, Y, Z, rstride=1, cstride=1,
-                    cmap=cm.coolwarm, linewidth=0, antialiased=False)
-    # ax.plot_surface(X, Y, Z, rstride=4, cstride=4, alpha=0.25)
-    cset = ax.contour(X, Y, Z, zdir='z', offset=-np.pi/4, cmap=cm.coolwarm)
-    cset = ax.contour(X, Y, Z, zdir='x', offset=-np.pi/4, cmap=cm.coolwarm)
-    cset = ax.contour(X, Y, Z, zdir='y', offset=3*np.pi/4, cmap=cm.coolwarm)
-    # cb = fig.colorbar(p, shrink=0.5)
+#     Z = gabor_filter_even(X, Y, 2.5, R[i], params.f0x_new, params.f0y)
+#     ax = fig.add_subplot(2, int(len(filters)/2), i+1, projection='3d')
+#     ax.plot_surface(X, Y, Z, rstride=1, cstride=1,
+#                     cmap=cm.coolwarm, linewidth=0, antialiased=False)
+#     # ax.plot_surface(X, Y, Z, rstride=4, cstride=4, alpha=0.25)
+#     cset = ax.contour(X, Y, Z, zdir='z', offset=-np.pi/4, cmap=cm.coolwarm)
+#     cset = ax.contour(X, Y, Z, zdir='x', offset=-np.pi/4, cmap=cm.coolwarm)
+#     cset = ax.contour(X, Y, Z, zdir='y', offset=3*np.pi/4, cmap=cm.coolwarm)
+#     # cb = fig.colorbar(p, shrink=0.5)
 
-    ax.set_title(" filter bank "+str(i)+"/8 pi")
-    ax.set_zlabel('Z', fontdict={'size': 15, 'color': 'red'})
-    ax.set_ylabel('Y', fontdict={'size': 15, 'color': 'red'})
-    ax.set_xlabel('X', fontdict={'size': 15, 'color': 'red'})
-print("_______________________")
+#     ax.set_title(" filter bank "+str(i)+"/8 pi")
+#     ax.set_zlabel('Z', fontdict={'size': 15, 'color': 'red'})
+#     ax.set_ylabel('Y', fontdict={'size': 15, 'color': 'red'})
+#     ax.set_xlabel('X', fontdict={'size': 15, 'color': 'red'})
+# print("_______________________")
 
 ##############################################
 
@@ -542,12 +543,34 @@ with Timer("synchronous solution computing..."):
             grid_vox += np.exp(exponent_space + exponent_time)
 
 # print (np.round_(t.time() - t_begin, 3), 'sec elapsed')
-print(grid_vox.shape)
+# print(grid_vox.shape)
 # print(grid_vox)
 # plt.imshow(grid_vox)
 print("_______________________")
 
 ##############################################
+#Normalize
+
+print('Normalize')
+
+u = np.zeros((params.band_height, params.band_width), dtype=np.float32)
+v = np.zeros((params.band_height, params.band_width), dtype=np.float32)
+######################here##############################
+
+# for k in range(params.filter_amount):
+#     # there is no minus in sin, which I think is correct.
+#     # this is due to -theta in filter.
+#     u = u + np.cos(params.xi0 * k / params.filter_amount) * grid_vox[:,:,k]
+#     v = v + np.sin(params.xi0 * k / params.filter_amount) * grid_vox[:,:,k]
+########################here##################################
+
+u_normalized, v_normalized = normalize(u, v)
+quiver_show_subset(u_normalized, v_normalized, 0, params.band_width, 0, params.band_height)
+plt.savefig("output_figures/whole_image_normalized.png")
+
+
+##############################################
+
 
 # 3D Meshgrid
 print("3D Meshgrid spatial")
@@ -588,7 +611,9 @@ print(grid_vox_spatial.shape)
 # plt.imshow(grid_spatial_vox)
 print("_______________________")
 
+
 ##############################################
+
 
 print("Write input_data.npy in __pycache__")
 res = np.sum(grid_vox, axis=2)

@@ -2,6 +2,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 import math
 
+import pandas as pd
+
 plt.close('all')
 
 
@@ -18,6 +20,35 @@ class params:
     event_path = '../slider_far/output.txt'
 
     # n_events = 1e4
+
+    event_list = pd.read_csv(event_path, delim_whitespace=True, header=None,
+                          names=['t', 'x', 'y', 'p'],
+                          dtype={'t': np.float64, 'x': np.int16, 'y': np.int16, 'p': np.int8},
+                          engine='c', nrows=None, memory_map=True)
+    # no polarity needed
+    event_list = event_list.drop(columns=['p'])
+    event_list = event_list.to_records(index=False)
+
+    # First row: time, x, y
+    time_start = event_list[0][0]
+    time_end = event_list[len(event_list)-1][0]
+
+    # Temporal filters become 0 when t_diff > 0.07
+    # So we can get a period that uses such
+    t_diff = 0.7
+
+    t_start = event_list[0][0]
+    t_end = t_start + t_diff
+
+
+    start_ind = 0 # replace with searchsorted left if not 0
+    stop_ind = np.searchsorted(event_list['t'], t_end, "left")
+
+    filter_amount = 32
+
+    filter_apothem = 10
+
+    filter_size = filter_apothem * 2 + 1
 
     mono_wm1 = 1.95
 
@@ -69,9 +100,9 @@ class params:
     sensor_height = 180
 
     # Select sub-region of the image
-    band_height = 300   # 40 original
+    band_height = 40   # 40 original
 
-    band_width = 300 # 80 original
+    band_width = 80 # 80 original
 
     offset_height = 20  # 20 original
 
