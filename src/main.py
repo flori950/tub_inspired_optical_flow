@@ -54,8 +54,8 @@ ax1.plot(t_spatial, (Tmono_spatial+Tbi_spatial) / val_max, "r-")
 ax1.set_title("temporal filters (mono- and bi-phasic)-spatial")
 ax1.set_xlabel("time")
 plt.savefig("../output_figures/temporal_filters_mono_bi_spatial.png")
-plt.grid()
-plt.show()
+#plt.grid()
+#plt.show()
 
 
 ###########################################################
@@ -73,8 +73,8 @@ ax1.plot(t, Tbi/np.max(np.abs(Tbi)), 'b-')
 ax1.set_title("temporal filters (mono- and bi-phasic)- original")
 ax1.set_xlabel('time')
 plt.savefig("../output_figures/temporal_filters_mono_bi.png")
-plt.grid()
-plt.show()
+#plt.grid()
+#plt.show()
 print("_______________________")
 
 ##############################################
@@ -749,8 +749,8 @@ with Timer("Aggregate..."):
 u_normalized, v_normalized = normalize(u, v)
 plt.quiver(X, Y, u_normalized, v_normalized, color='r')
 plt.savefig("../output_figures/plt_save_whole_image_normalized.png")
-quiver_show_subset(u_normalized, v_normalized, 0, params.band_width, 0, params.band_height)
-plt.savefig("../output_figures/whole_image_normalized.png")
+# quiver_show_subset(u_normalized, v_normalized, 0, params.band_width, 0, params.band_height)
+# plt.savefig("../output_figures/whole_image_normalized.png")
 print("_______________________")
 
 ##############################################
