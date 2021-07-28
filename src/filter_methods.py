@@ -1,6 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 import math
+import cv2
 from global_params import params
 
 plt.close('all')
@@ -44,6 +45,34 @@ def spatial_gabor_filter_odd(x, y, sigma, theta, f0x, f0y):
     gabor_second = np.sin(params.xi0 * (f0x * x_hat + f0y * y_hat))
     return (params.xi0 / sigma**2) * gabor_first * gabor_second
 
+
+###############################################
+
+def normalize(u, v):
+    beta_response = 1
+    alpha_p = 0.1
+    alpha_q = 0.002
+    sigma_response = 3.6
+
+    center = math.ceil(sigma_response * 3)
+    size = center * 2 + 1
+
+    filter_gaussian = cv2.getGaussianKernel(size, sigma_response)
+
+    def relu(x):
+        return x * (x > 0)
+
+    uv_response = np.sqrt(u**2 + v**2)
+
+    relu_response = relu(uv_response)
+    gaussian_response = cv2.filter2D(relu_response, -1, filter_gaussian)
+    normalized_response = beta_response * uv_response / (alpha_p + uv_response + relu(gaussian_response / alpha_q))
+
+    ratio = normalized_response / uv_response
+    u_normalized = ratio * u
+    v_normalized = ratio * v
+
+    return u_normalized, v_normalized
 
 ###############################################
 
