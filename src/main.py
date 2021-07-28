@@ -747,6 +747,8 @@ with Timer("Aggregate..."):
         v = v+(-1)*np.sin(np.pi*2*k/N)*out_xy[k]
 
 u_normalized, v_normalized = normalize(u, v)
+plt.quiver(X, Y, u_normalized, v_normalized, color='r')
+plt.savefig("../output_figures/plt_save_whole_image_normalized.png")
 quiver_show_subset(u_normalized, v_normalized, 0, params.band_width, 0, params.band_height)
 plt.savefig("../output_figures/whole_image_normalized.png")
 print("_______________________")
