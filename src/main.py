@@ -543,31 +543,10 @@ with Timer("synchronous solution computing..."):
             grid_vox += np.exp(exponent_space + exponent_time)
 
 # print (np.round_(t.time() - t_begin, 3), 'sec elapsed')
-# print(grid_vox.shape)
+print(grid_vox.shape)
 # print(grid_vox)
 # plt.imshow(grid_vox)
 print("_______________________")
-
-##############################################
-#Normalize
-
-print('Normalize')
-
-u = np.zeros((params.band_height, params.band_width), dtype=np.float32)
-v = np.zeros((params.band_height, params.band_width), dtype=np.float32)
-######################here##############################
-
-for k in range(params.filter_amount):
-    # there is no minus in sin, which I think is correct.
-    # this is due to -theta in filter.
-    u = u + np.cos(params.xi0 * k / params.filter_amount) * grid_vox[:,:,k]
-    v = v + np.sin(params.xi0 * k / params.filter_amount) * grid_vox[:,:,k]
-########################here##################################
-
-u_normalized, v_normalized = normalize(u, v)
-quiver_show_subset(u_normalized, v_normalized, 0, params.band_width, 0, params.band_height)
-plt.savefig("../output_figures//whole_image_normalized.png")
-
 
 ##############################################
 
@@ -756,6 +735,24 @@ plt.savefig("../output_figures/temporal_Output_of_velocity.png")
 print("_______________________")
 
 ##############################################
+#Normalize
+
+print('Normalize')
+u = np.zeros((params.band_height, params.band_width), dtype=np.float32)
+v = np.zeros((params.band_height, params.band_width), dtype=np.float32)
+N = 8
+with Timer("Aggregate..."):
+    for k in range(len(filters)):
+        u = u+np.cos(np.pi*2*k/N)*out_xy[k]
+        v = v+(-1)*np.sin(np.pi*2*k/N)*out_xy[k]
+
+u_normalized, v_normalized = normalize(u, v)
+quiver_show_subset(u_normalized, v_normalized, 0, params.band_width, 0, params.band_height)
+plt.savefig("../output_figures/whole_image_normalized.png")
+print("_______________________")
+
+##############################################
+
 
 u_spatial = np.zeros((params.band_height, params.band_width), dtype=np.float32)
 v_spatial = np.zeros((params.band_height, params.band_width), dtype=np.float32)

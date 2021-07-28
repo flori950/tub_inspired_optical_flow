@@ -100,9 +100,9 @@ class params:
     sensor_height = 180
 
     # Select sub-region of the image
-    band_height = 40   # 40 original
+    band_height = 240   # 40 original
 
-    band_width = 80 # 80 original
+    band_width = 300 # 80 original
 
     offset_height = 20  # 20 original
 
