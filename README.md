@@ -45,9 +45,9 @@ is provided by [Cedric Scheerlinck](https://www.cedricscheerlinck.com/about/)
 > > > b. visualization of filters above in 2d or 3d view   
 >>>c.implementation of equation (Eq 23) in [<sup>1</sup>](#refer-anchor-1)[@tschechneBioInspiredOpticFlow2014] and visualization  
 >>>d.using aggregation to calculate the velocity at each pixel for optical flow  based on separable filters and visualization(Eq.33 [<sup>1</sup>](#refer-anchor-1))  
->>>e. .npy files are the intermediate files
->>>f. EV-seg from here
-[code](https://github.com/remindof/EV-MotionSeg)
+>>>e. .npy files are the intermediate files 
+> > >f. EV-seg from 
+[here](https://github.com/remindof/EV-MotionSeg)
 
 ### Dependencies of this code
 numpy,  
