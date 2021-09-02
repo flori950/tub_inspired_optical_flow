@@ -28,6 +28,7 @@ This is the code used to produce a filter part(Section 2.2 and Section 3.1) of t
 [code](https://github.com/tub-sgg/Bio_inspired_Optical_flow)
 [code](https://github.com/cedric-scheerlinck/jupnote_event_demo)
 is provided by [Cedric Scheerlinck](https://www.cedricscheerlinck.com/about/)    
+>
 >>bayes.ipynb
 >>>including sementing optical flows to two moving objects according to the output from EV-MotionSeg MATLAB code, and Bayesian methods to recover the velocities.
 
