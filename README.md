@@ -28,7 +28,8 @@ This is the code used to produce a filter part(Section 2.2 and Section 3.1) of t
 [code](https://github.com/tub-sgg/Bio_inspired_Optical_flow)
 [code](https://github.com/cedric-scheerlinck/jupnote_event_demo)
 is provided by [Cedric Scheerlinck](https://www.cedricscheerlinck.com/about/)    
-
+>>bayes.ipynb
+>>>including sementing optical flows to two moving objects according to the output from EV-MotionSeg MATLAB code, and Bayesian methods to recover the velocities.
 
 >-[Dataset](http://rpg.ifi.uzh.ch/datasets/davis/slider_far.zip):  
 >>This is the dataset which is used in this project.For this dataset, only event.txt is used.
@@ -43,7 +44,9 @@ is provided by [Cedric Scheerlinck](https://www.cedricscheerlinck.com/about/)
 > > > b. visualization of filters above in 2d or 3d view   
 >>>c.implementation of equation (Eq 23) in [<sup>1</sup>](#refer-anchor-1)[@tschechneBioInspiredOpticFlow2014] and visualization  
 >>>d.using aggregation to calculate the velocity at each pixel for optical flow  based on separable filters and visualization(Eq.33 [<sup>1</sup>](#refer-anchor-1))  
->>>e. .npy files are the intermediate files  
+>>>e. .npy files are the intermediate files
+>>>f. EV-seg from here
+[code](https://github.com/remindof/EV-MotionSeg)
 
 ### Dependencies of this code
 numpy,  
