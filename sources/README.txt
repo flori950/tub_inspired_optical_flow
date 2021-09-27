@@ -1,1 +1,0 @@
-Please change the path to the utils.py, events.txt, and so on
