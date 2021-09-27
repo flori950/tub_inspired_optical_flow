@@ -5,7 +5,7 @@ This project is one part of the module: Bio-inspired computer vision and was imp
 
 
 >-Sources:
->>This is the folder contains the slides and the original jupyter notebook which explains some general ideas of this project. Futhermore it has the implementation and usage of the temporal filter
+>>This is the folder contains the slides and the original jupyter notebook which explains some general ideas of this project. Futhermore it has the implementation and usage of the temporal filter.
 > > 1.optical_flow.ipynb
 > > > a.definitions of  spatial and temporal filters  
 > > > b. visualization of filters above in 2d or 3d view   

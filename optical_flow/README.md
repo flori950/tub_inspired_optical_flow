@@ -5,8 +5,8 @@ This project is one part of the module: Bio-inspired computer vision and was imp
 
 
 >-sources:
->>This folder contains the codes used for this part
->>This is the folder contains the slides and the original jupyter notebook which explains some general ideas of this project. Futhermore it has the implementation and usage of the temporal filter
+>>This folder contains the codes used for this part.
+>>This is the folder contains the slides and the original jupyter notebook which explains some general ideas of this .project. Futhermore it has the implementation and usage of the temporal filter.
 
 
 >-src:  

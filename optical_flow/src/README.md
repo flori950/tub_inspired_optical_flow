@@ -6,12 +6,12 @@ This project is one part of the module: Bio-inspired computer vision and was imp
 
 >-Python code:  folder:src
 > > main.py
-> > > Main-file for running the code
-> > > This is where the code is executed
-> > > Please install Python to run the code
-> > > Open the folder you are in in the command window and type python main.py to start the program
-> > > Close the generated windows if you want to continue the program
-> > > Please also watch the terminal output to understand where the program is
+> > > Main-file for running the code.
+> > > This is where the code is executed.
+> > > Please install Python to run the code.
+> > > Open the folder you are in in the command window and type python main.py to start the program.
+> > > Close the generated windows if you want to continue the program.
+> > > Please also watch the terminal output to understand where the program is.
 > > integrator_methods.py
 > > global_params.py
 > > > change any parameter here and include it with "params.<variable/methodname>"
