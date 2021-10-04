@@ -43,9 +43,9 @@ is provided by [Cedric Scheerlinck](https://www.cedricscheerlinck.com/about/)
 >>bayes.ipynb
 >>>including sementing optical flows to two moving objects according to the output from EV-MotionSeg MATLAB code, and Bayesian methods to recover the velocities.
 
-### Changes to Ling Bings Code
+### Changes to Bing Lis Code
 
->-Ling Bings Code:
+>-Bing Lis Code:
 > > Two input files (events, utils.py),
 > > One Jupyter Notebook file where all methods are written,
 > > No Connection to the output-folder in the code,
@@ -95,7 +95,7 @@ The images show two waving hands that are moving in opposite horizontal directio
 
 >-Sources:
 >>This is the folder contains the slides and the original jupyter notebook which explains some general ideas of this project. Futhermore it has the implementation and usage of the temporal filter
-> > 1.optical_flow.ipynb
+> > 1.optical_flow.ipynb (written by Bing Li)
 > > > a.definitions of  spatial and temporal filters  
 > > > b. visualization of filters above in 2d or 3d view   
 >>>c.implementation of equation (Eq 23) in [<sup>1</sup>](#refer-anchor-1)[@tschechneBioInspiredOpticFlow2014] and visualization  
@@ -145,5 +145,5 @@ python packages:
 
 ### Sources of the code:
 
-https://github.com/tub--sgg/Bio_inspired_Optical_flow/blob/master/src/optical_flow.ipynsgg/Bio_inspired_Optical_flow/blob/master/src/optical_flow.ipynbb written by Ling Bing
+https://github.com/tub--sgg/Bio_inspired_Optical_flow/blob/master/src/optical_flow.ipynsgg/Bio_inspired_Optical_flow/blob/master/src/optical_flow.ipynbb written by Bing Li
 
