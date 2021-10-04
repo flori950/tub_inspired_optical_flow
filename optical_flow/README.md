@@ -77,11 +77,11 @@ is provided by [Cedric Scheerlinck](https://www.cedricscheerlinck.com/about/)
 
 
 ## Results
-The images show two waving hands that are moving in opposite horizontal directions original generated and normalized.
+The images show two waving hands that are moving in opposite horizontal directions original generated normalized with new added filters (2) and without (1).
 
-![image](https://github.com/flori950/tub_inspired_optical_flow/blob/master/optical_flow/output_figures/plt_save_whole_image_normalized.png)
+![image](https://github.com/flori950/tub_inspired_optical_flow/blob/master/optical_flow/output_figures/plt_save_whole_image_normalized.png) (1)
 
-![image](https://github.com/flori950/tub_inspired_optical_flow/blob/master/optical_flow/output_figures/whole_image_normalized.png)
+![image](https://github.com/flori950/tub_inspired_optical_flow/blob/master/optical_flow/output_figures/whole_image_normalized.png) (2)
 
 
 
