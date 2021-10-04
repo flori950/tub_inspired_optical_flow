@@ -113,7 +113,18 @@ packages:
 -opencv,  
 -scipy
 
-#### References   
+
+>-output_figures :  
+>>The generated figures are saved in this folder 
+
+>-slider_far:
+>>This is the dataset which is used in this project.
+>-[Dataset](http://rpg.ifi.uzh.ch/datasets/davis/slider_far.zip):
+
+
+### Sources of the code:
+
+https://github.com/tub--sgg/Bio_inspired_Optical_flow/blob/master/src/optical_flow.ipynsgg/Bio_inspired_Optical_flow/blob/master/src/optical_flow.ipynbb written by Bing Li
 
 <div id="refer-anchor-1"></div>
 
@@ -126,24 +137,3 @@ packages:
 <div id="refer-anchor-3"></div>
 
 - [3]Tschechne, Stephan and Brosch, Tobias and Sailer, Roman and von Egloffstein, Nora and Abdul-Kreem, Luma Issa and Neumann, Heiko.*[On Event-Based Motion Detection and Integration](https://doi.org/10.4108/icst.bict.2014.257904)*
-
->-output_figures :  
->>The generated figures are saved in this folder 
-
->-slider_far:
->>This is the dataset which is used in this project.
->-[Dataset](http://rpg.ifi.uzh.ch/datasets/davis/slider_far.zip):
-
-### Dependencies of this code
-python,
-python packages:
--numpy,  
--matiplotlib,  
--pandas,  
--opencv,  
--scipy
-
-### Sources of the code:
-
-https://github.com/tub--sgg/Bio_inspired_Optical_flow/blob/master/src/optical_flow.ipynsgg/Bio_inspired_Optical_flow/blob/master/src/optical_flow.ipynbb written by Bing Li
-

@@ -1,11 +1,6 @@
 # *Bio-Inspired Computer Vision:  BAYESIAN INFERENCE OF MODELS ON EVENT BASED OPTICAL FLOW TO SOLVE APERTURE PROBLEM*
 This project is one part of the module: Bio-inspired computer vision and was implemented by Florian Jäger and Weijie Qi under Prof. Dr. Marianne Maertens and Prof. Guillermo Gallego.
   
-### The folder contains the following:
-
-Please write down what is here and what the user should do to run it.
-
-
 # EV-MotionSeg
 https://github.com/remindof/EV-MotionSeg
 MATLAB code for paper "Event-Based Motion Segmentation by Motion Compensation"
@@ -17,17 +12,24 @@ The algorithm has been simplified and the code does not aim to reproduce the ori
 - No details of  Dirac delta function approximation in original paper, thus I manually set the gradient of delta function, see function findGradDelta in "updateMotionParam.m"
 - Only linear warp has been considered.
 
+## Input
+
+![image](https://github.com/flori950/tub_inspired_optical_flow/blob/master/event_segmentation/input_images/original_generated.png)
+
 ## Results
 The images show two waving hands that are moving in opposite horizontal directions.
 
-The probabilities of event clusters during the iterations:
+This is our result generated of the following file https://github.com/flori950/tub_inspired_optical_flow/blob/master/optical_flow/src/bayes.ipynb:
 
-![image](https://github.com/remindof/EV-MotionSeg/blob/master/results/iter1-3_clusters.png)
+![image](https://github.com/flori950/tub_inspired_optical_flow/blob/master/event_segmentation/output_images/1.png)
 
-IWE (Image of Warpped Events) after 3 iterations:
+![image](https://github.com/flori950/tub_inspired_optical_flow/blob/master/event_segmentation/output_images/2.png)
 
-![image](https://github.com/remindof/EV-MotionSeg/blob/master/results/iter%3D3_IWE.png)
+## Discussion
 
-The scenario with only 1 cluster but the parameter of cluster number was set to 2:
+>-What we have achieved:
+recover the two velocities belong to two objects intuitively.
 
-![image](https://github.com/remindof/EV-MotionSeg/blob/master/results/cluster_no%3D2but_only_1.png)
+>-Our limit:
+Do not have the ground truth value so that we cannot quantify our effects and errors.
+Depends a lot on the result of motion segmentation.
