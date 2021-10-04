@@ -1,4 +1,4 @@
-# *Bio-Inspired Computer Vision:  Optical flow estimation using space-time separable filters*
+# *Bio-Inspired Computer Vision:  BAYESIAN INFERENCE OF MODELS ON EVENT BASED OPTICAL FLOW TO SOLVE APERTURE PROBLEM*
 This project is one part of the module: Bio-inspired computer vision and was implemented by Florian Jäger and Weijie Qi under Prof. Dr. Marianne Maertens and Prof. Guillermo Gallego.   
 
 
