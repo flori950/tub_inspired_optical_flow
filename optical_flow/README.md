@@ -46,34 +46,34 @@ is provided by [Cedric Scheerlinck](https://www.cedricscheerlinck.com/about/)
 ### Changes to Ling Bings Code
 
 >-Ling Bings Code:
->>Two input files (events, utils.py)
->>One Jupyter Notebook file where all methods are written
->>No Connection to the output-folder in the code
->>No usage of the kernels
->>Kernels are stored in the same folder
->>Rare Terminal outputs
+> > Two input files (events, utils.py)
+> > One Jupyter Notebook file where all methods are written
+> > No Connection to the output-folder in the code
+> > No usage of the kernels,
+> > Kernels are stored in the same folder
+> > Rare Terminal outputs
 
 >-Why the Changes:
->>Easier to understand, change parameters, execute via terminal, (problems with executing parts of the code)
->>Faster (generating pictures)
+> > Easier to understand, change parameters, execute via terminal, (problems with executing parts of the code)
+> > Faster (generating pictures)
 
 >-Changes:
->>One global parameter file (many parameters were stored in the IPYNB)
->>Change the project to python only to be sure, tha each package could be read by the code
->>Exclude all filter methods to a seperate file
->>Exclude all integrator methods to a seperate file
->>Using the generated kernels
->>Generating a kernel folder 
->>Generate the actual pictures to the output folder
->>Adding terminal outputs for a better understanding of the code
->>Image generatingduring runtime
->>Changing the input parameters to get the wanted picture
+> > One global parameter file (many parameters were stored in the IPYNB)
+> > Change the project to python only to be sure, tha each package could be read by the code
+> > Exclude all filter methods to a seperate file
+> > Exclude all integrator methods to a seperate file
+> > Using the generated kernels
+> > Generating a kernel folder 
+> > Generate the actual pictures to the output folder
+> > Adding terminal outputs for a better understanding of the code
+> > Image generatingduring runtime
+> > Changing the input parameters to get the wanted picture
 
 >-Added:
->>New gabor filter,
->>New temporal filter,
->>New bi and mono spacial filter
->>New normalization Mehtods (Adding specific filter parameters)
+> > New gabor filter,
+> > New temporal filter,
+> > New bi and mono spacial filter
+> > New normalization Mehtods (Adding specific filter parameters)
 
 
 ## Results
@@ -105,11 +105,13 @@ The images show two waving hands that are moving in opposite horizontal directio
 [here](https://github.com/remindof/EV-MotionSeg)
 
 ### Dependencies of this code
-numpy,  
-matiplotlib,  
-pandas,  
-opencv,  
-scipy
+python
+packages:
+-numpy,  
+-matiplotlib,  
+-pandas,  
+-opencv,  
+-scipy
 
 #### References   
 
