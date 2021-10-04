@@ -54,24 +54,3 @@ is provided by [Cedric Scheerlinck](https://www.cedricscheerlinck.com/about/)
 >>>e. .npy files are the intermediate files 
 > > >f. EV-seg from 
 [here](https://github.com/remindof/EV-MotionSeg)
-
-### Dependencies of this code
-numpy,  
-matiplotlib,  
-pandas,  
-opencv,  
-scipy
-
-#### References   
-
-<div id="refer-anchor-1"></div>
-
-- [1] Brosch Tobias, Tschechne Stephan, Neumann Heiko,*[On event-based optical flow detection](https://www.frontiersin.org/article/10.3389/fnins.2015.00137)*
-
-<div id="refer-anchor-2"></div>
-
-- [2] Tschechne, Stephan and Sailer, Roman and Neumann,Heiko.*[Bio-Inspired Optic Flow from Event-Based Neuromorphic Sensor Input](https://link.springer.com/chapter/10.1007/978-3-319-11656-3_16)*  
-
-<div id="refer-anchor-3"></div>
-
-- [3]Tschechne, Stephan and Brosch, Tobias and Sailer, Roman and von Egloffstein, Nora and Abdul-Kreem, Luma Issa and Neumann, Heiko.*[On Event-Based Motion Detection and Integration](https://doi.org/10.4108/icst.bict.2014.257904)*
